@@ -1,2 +1,2 @@
 # Honeypot
-Capture and store cyber attacks.
+detect, capture, and record cyber attacks as they happen.
