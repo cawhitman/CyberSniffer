@@ -1,6 +1,7 @@
-from cyberattack import CyberAttack
+from models import CyberAttack
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from configs import BASE
 
 
 class DBSession():
@@ -10,11 +11,10 @@ class DBSession():
 
 
     def db_connect(self):
-        global Base
         if not self.engine.dialect.has_table(self.engine, CyberAttack):
-            Base.metadata.create_all(bind=self.engine)
+            BASE.metadata.create_all(bind=self.engine)
 
-        Base.metadata.reflect(bind=self.engine)
+        BASE.metadata.reflect(bind=self.engine)
 
 
     def db_update(self, cyber_attack):

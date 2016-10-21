@@ -1,10 +1,8 @@
 from sqlalchemy import Column, Integer, String
+from configs import BASE
 
 
-Base = declarative_base()
-
-
-class CyberAttack(Base):
+class CyberAttack(BASE):
     __tablename__ = 'CyberAttack'
 
     id = Column(Integer, primary_key=True)
@@ -21,3 +19,4 @@ class CyberAttack(Base):
                "source_port={2}, dest_port={3}, " \
                "protocol='{4}', time={5}" \
                ")>".format(self.source_ip, self.dest_ip, self.source_port, self.dest_port, self.protocol, self.time)
+
