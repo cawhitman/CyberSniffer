@@ -1,3 +1,4 @@
+from honeypot.configs import DATABASE
 from honeypot.dbsession import DBSession
 from honeypot.models import CyberAttack
 
@@ -5,7 +6,8 @@ from honeypot.models import CyberAttack
 class Service(object):
 
     def __init__(self, model):
-        self.db_session = DBSession()
+        self.db_session = DBSession(dialect='postgresql', username=DATABASE['USERNAME'], password=DATABASE['PASSWORD'],
+                                    host=DATABASE['HOST'], database=DATABASE['DB_NAME'])
         self.db_session.db_connect()
         self.model = model
 
