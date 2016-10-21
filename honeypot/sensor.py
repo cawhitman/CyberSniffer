@@ -1,8 +1,9 @@
 import time
-from scapy.all import sniff, IP, TCP
-from configs import SENSOR_IP
-from services import CyberAttackService
 
+from scapy.all import sniff, IP, TCP
+
+from honeypot.configs import SENSOR_IP
+from honeypot.services import CyberAttackService
 
 cyber_attack_service = CyberAttackService()
 sniff(

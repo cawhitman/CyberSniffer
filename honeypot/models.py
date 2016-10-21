@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String
-from configs import BASE
+
+from honeypot.configs import BASE
 
 
 class CyberAttack(BASE):

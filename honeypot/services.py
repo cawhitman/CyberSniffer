@@ -1,5 +1,5 @@
-from dbsession import DBSession
-from models import CyberAttack
+from honeypot.dbsession import DBSession
+from honeypot.models import CyberAttack
 
 
 class Service(object):

@@ -1,7 +1,8 @@
-from models import CyberAttack
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from configs import BASE
+
+from honeypot.configs import BASE
+from honeypot.models import CyberAttack
 
 
 class DBSession(object):
