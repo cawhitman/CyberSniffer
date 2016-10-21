@@ -21,10 +21,11 @@ def pcap_default(packet):
     if packet.haslayer(IP) and packet.haslayer(TCP):
         ip = packet[IP]
         tcp = packet[TCP]
-
-        service.create_model(source_ip=ip.src, dest_ip=ip.dst,
-                             source_port=tcp.sport, dest_port=tcp.dport,
-                             protocol=ip.proto, time=time.time())
+        
+        if ip.dst == '192.168.56.103':
+            service.create_model(source_ip=ip.src, dest_ip=ip.dst,
+                                 source_port=tcp.sport, dest_port=tcp.dport,
+                                 protocol=ip.proto, time=time.time())
 
 sens = Sensor(callback=lambda packet: pcap_default(packet))
 sens.start_sniffing()
