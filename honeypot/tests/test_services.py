@@ -15,7 +15,7 @@ class ServiceTestCase(TestCase):
         self.cyber_attack = CyberAttack(
             source_ip='192.168.56.101', dest_ip='192.168.56.102',
             source_port=22, dest_port=56,
-            protocol='6', time=32
+            service='SSH', time=32
         )
 
     def test_init(self):
@@ -35,7 +35,7 @@ class ServiceTestCase(TestCase):
         self.service.create_model(
             source_ip='192.168.56.101', dest_ip='192.168.56.102',
             source_port=22, dest_port=56,
-            protocol='6', time=32
+            service='SSH', time=32
         )
         cyber_attacks = self.service.session.query(CyberAttack).all()
 
