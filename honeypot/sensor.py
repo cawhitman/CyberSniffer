@@ -14,6 +14,6 @@ sniff(
     prn=lambda packet: cyber_attack_service.create_model(
         source_ip=packet[IP].src, dest_ip=packet[IP].dst,
         source_port=packet[TCP].sport, dest_port=packet[TCP].dport,
-        service=TCP_REVERSE[packet[TCP].sport], time=time.time()
+        service=TCP_REVERSE[packet[TCP].dport], time=time.time()
     )
 )
