@@ -27,6 +27,9 @@ class Service(object):
 
         return model
 
+    def list_models(self, **kwargs):
+        return self.session.query(self.model).filter_by(**kwargs)
+
     def clear(self):
         self.session.query(self.model).delete()
 

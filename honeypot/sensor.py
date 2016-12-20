@@ -9,6 +9,7 @@ TCP_REVERSE = dict((TCP_SERVICES[k], k) for k in TCP_SERVICES.keys())
 
 cyber_attack_service = CyberAttackService()
 
+
 def handle_packet(packet):
     source_ip = packet[IP].src
     dest_ip = packet[IP].dst
@@ -20,11 +21,12 @@ def handle_packet(packet):
     except:
         service = "unknown"
 
-    cyber_attack_service.create_model(
-        source_ip=source_ip, dest_ip=dest_ip,
-        source_port=source_port, dest_port=dest_port,
-        service=service, time=time.time()
-    )
+    if len(cyber_attack_service.list_models(source_ip=source_ip, dest_ip=dest_ip, source_port=source_port, time=time.time())) == 0:
+        cyber_attack_service.create_model(
+            source_ip=source_ip, dest_ip=dest_ip,
+            source_port=source_port, dest_port=dest_port,
+            service=service, time=time.time()
+        )
 
 sniff(
     iface='enp0s8', store=0,
