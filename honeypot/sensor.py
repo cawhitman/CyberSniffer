@@ -21,11 +21,11 @@ def handle_packet(packet):
     except:
         service = "unknown"
 
-    if len(cyber_attack_service.list_models(source_ip=source_ip, dest_ip=dest_ip, source_port=source_port, time=time.time())) == 0:
+    if cyber_attack_service.list_models(source_ip=source_ip, dest_ip=dest_ip, source_port=source_port, time=int(time.time())).count() == 0:
         cyber_attack_service.create_model(
             source_ip=source_ip, dest_ip=dest_ip,
             source_port=source_port, dest_port=dest_port,
-            service=service, time=time.time()
+            service=service, time=int(time.time())
         )
 
 sniff(
