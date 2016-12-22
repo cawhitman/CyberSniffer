@@ -1,6 +1,6 @@
 import time
 
-from scapy.all import sniff, IP, TCP, TCP_SERVICES
+from scapy.all import sniff, IP, TCP, UDP, TCP_SERVICES
 
 from honeypot.configs import SENSOR_IP
 from honeypot.services import CyberAttackService
@@ -11,10 +11,16 @@ cyber_attack_service = CyberAttackService()
 
 
 def handle_packet(packet):
+
     source_ip = packet[IP].src
     dest_ip = packet[IP].dst
-    source_port = packet[TCP].sport
-    dest_port = packet[TCP].dport
+
+    if TCP in packet:
+        source_port = packet[TCP].sport
+        dest_port = packet[TCP].dport
+    else:
+        source_port = packet[UDP].sport
+        dest_port = packet[UDP].dport
 
     try:
         service = TCP_REVERSE[packet[TCP].dport]
@@ -30,6 +36,6 @@ def handle_packet(packet):
 
 sniff(
     iface='enp0s8', store=0,
-    filter="ip and tcp and dst host " + SENSOR_IP,
+    filter="ip and tcp or udp and dst host " + SENSOR_IP,
     prn=handle_packet
 )
